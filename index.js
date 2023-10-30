@@ -3,11 +3,17 @@ const express = require("express");
 const studentRoute = require("./controller/studentRoute");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
+const dotenv = require("dotenv").config();
 const app = express();
 
 mongoose.set("strictQuery",true);
-mongoose.connect("mongodb+srv://try:12345@cluster0.40a4onf.mongodb.net/schooldb");
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((err) => {
+    console.error('Error connecting to the database:', err);
+  });
 var db = mongoose.connection;
 db.on("open",()=>console.log("Connected to DB"));
 db.on("error",()=>console.log("Error occurred"));
