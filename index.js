@@ -7,13 +7,8 @@ const dotenv = require("dotenv").config();
 const app = express();
 
 mongoose.set("strictQuery",true);
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log('Connected to the database');
-  })
-  .catch((err) => {
-    console.error('Error connecting to the database:', err);
-  });
+mongoose.connect( "mongodb+srv://try:12345@cluster0.40a4onf.mongodb.net/schooldb")
+
 var db = mongoose.connection;
 db.on("open",()=>console.log("Connected to DB"));
 db.on("error",()=>console.log("Error occurred"));
